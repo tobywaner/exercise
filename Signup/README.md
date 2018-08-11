@@ -13,6 +13,7 @@ index
 /login
 /backoffice/student
 /backoffice/recruit
+/backoffice/depart
  login page
  
 /backoffice/recruit/list
@@ -21,7 +22,10 @@ index
 /backoffice/recruit/detail?suid=xxxx-xx-xx-xxxx
 /backoffice/student/add?suid=xxxx-xx-xx-xxxx
 /backoffice/student/detail?suid=xxxx-xx-xx-xxxx&stid=xxxx-xx-xx-xxxx
- recruit mgnt page and student mgnt page,need login
+/backoffice/depart/add
+/backoffice/depart/list
+/backoffice/depart/modify?dtid=xxxx-xx-xx-xxxx
+ recruit mgnt page,depart mgnt page and student mgnt page,need login
  
 **2.table design**
 students:
@@ -42,12 +46,14 @@ recruits:
  name:vchar(30)
  start_time:date
  ended_time:date
+ show_result_start_time:date
  allowed_earliest_birthday:date
  allowed_latest_birthday:date
  uuid:char(100)(table key)
  enabled:char(10)(true/false)
  introduce:vchar(2000)
  succ_info:vchar(2000)
+ wait_result_info:vchar(2000)
 
 scales:
   id:id
@@ -79,8 +85,10 @@ recruit:
   public string name = ""
   public string introduce = ""
   public string succ_info = ""
+  public string wait_result_info = ""
   public DateTime start_time = None
   public DateTime ended_time = None
+  public DateTime show_result_start_time = None
   public DateTime allowed_earliest_birthday = None
   public DateTime allowed_latest_birthday = None
   public string uuid = ""
@@ -97,3 +105,21 @@ depart:
   public string name = ""
   public string intro = ""
   public string address = ""
+
+
+**logic**
+recruit show logic:
+[added,enabled,it's not start time] /recruit:show introdu,can't sign up;/results redirect to /recruit page.
+[added,enabled,it's signup's time]   /recruit:allow sign up,and show sign up results;/results redirect to /recruit page.
+[added,enabled,it's show result time] /recruit:redirect to /results page;/results show results.
+[added,enabled,it's ended time but not show result time.] /recruit&/results:show "Please wait for results" page.
+[added,disabled] /recruit:404;/results:404
+recruit operation logic:
+add->list
+     modify
+     delete
+     [enabled/disabled]
+students operation logic in backoffice:
+add->list
+     modify
+     delete
