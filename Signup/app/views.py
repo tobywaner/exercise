@@ -7,14 +7,10 @@ from flask import render_template
 def index():
     return render_template("base.html")
 
-# /
-# index
-# nothing, only
-# show
-# a
-# blank(no
-# need
-# login)
+
+@app.route('/results')
+def show_results():
+    return render_template("results.html")
 #
 # / recruit?suid = xxxx - xx - xx - xxxx
 # a
