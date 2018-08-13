@@ -11,31 +11,21 @@ def index():
 @app.route('/results')
 def show_results():
     return render_template("results.html")
-#
-# / recruit?suid = xxxx - xx - xx - xxxx
-# a
-# sign
-# up
-# page(no
-# need
-# login)
-#
-# / results?suid = xxxx - xx - xx - xxxx
-# sign
-# up
-# result(maybe
-# need
-# cookie
-# support)(no need login)
-#
-# / backoffice
-# / login
-# / backoffice / student
-# / backoffice / recruit
-# / backoffice / depart
-# login
-# page
-#
+
+
+@app.route('/backoffice')
+@app.route('/login')
+@app.route('/backoffice/student')
+@app.route('/backoffice/recruit')
+@app.route('/backoffice/depart')
+def login():
+    return render_template("login.html")
+
+
+@app.route('/backoffice/recruit/list')
+def recruit_add():
+    return render_template("recruit/add.html")
+
 # / backoffice / recruit / list
 # / backoffice / recruit / add
 # / backoffice / recruit / modify?suid = xxxx - xx - xx - xxxx
