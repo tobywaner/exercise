@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template
+from flask import render_template, request
 
 
 @app.route('/')
@@ -10,7 +10,8 @@ def index():
 
 @app.route('/results')
 def show_results():
-    return render_template("results.html")
+    uuid = request.args.get('suid')
+    return render_template("results.html", uuid=uuid)
 
 
 @app.route('/backoffice')
@@ -22,9 +23,24 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/backoffice/recruit/list')
+@app.route('/backoffice/recruit/add')
 def recruit_add():
     return render_template("recruit/add.html")
+
+
+@app.route('/backoffice/recruit/list')
+def recruit_list():
+    return render_template("recruit/list.html")
+
+
+@app.route('/backoffice/recruit/modify/<recruit_uuid>')
+def recruit_update(recruit_uuid):
+    return render_template("recruit/modify.html", uuid=recruit_uuid)
+
+
+@app.route('/backoffice/recruit/detail/<recruit_uuid>')
+def recruit_show(recruit_uuid):
+    return render_template("recruit/detail.html", uuid=recruit_uuid)
 
 # / backoffice / recruit / list
 # / backoffice / recruit / add
