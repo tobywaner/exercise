@@ -11,7 +11,7 @@ def index():
 @app.route('/results')
 def show_results():
     uuid = request.args.get('suid')
-    return render_template("results.html", uuid=uuid)
+    return render_template("results.html", recruit_uuid=uuid)
 
 
 @app.route('/backoffice')
@@ -35,12 +35,12 @@ def recruit_list():
 
 @app.route('/backoffice/recruit/modify/<recruit_uuid>')
 def recruit_update(recruit_uuid):
-    return render_template("recruit/modify.html", uuid=recruit_uuid)
+    return render_template("recruit/modify.html", recruit_uuid=recruit_uuid)
 
 
 @app.route('/backoffice/recruit/detail/<recruit_uuid>')
 def recruit_show(recruit_uuid):
-    return render_template("recruit/detail.html", uuid=recruit_uuid)
+    return render_template("recruit/detail.html", recruit_uuid=recruit_uuid)
 
 # / backoffice / recruit / list
 # / backoffice / recruit / add
