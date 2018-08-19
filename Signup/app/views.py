@@ -14,6 +14,12 @@ def show_results():
     return render_template("results.html", recruit_uuid=uuid)
 
 
+@app.route("/recruit")
+def signup():
+    uuid = request.args.get("suid")
+    return render_template("signup.html", recruit_uuid=uuid)
+
+
 @app.route("/backoffice")
 @app.route("/login")
 @app.route("/backoffice/recruit")
@@ -47,14 +53,19 @@ def student_add(recruit_uuid):
     return render_template("student/add.html", recruit_uuid=recruit_uuid)
 
 
-@app.route("/backoffice/recruit/<recruit_uuid>/student/add")
-def student_add(recruit_uuid):
-    return render_template("student/add.html", recruit_uuid=recruit_uuid)
+@app.route("/backoffice/recruit/<recruit_uuid>/student/modify/<student_id>")
+def student_modify(recruit_uuid):
+    return render_template("student/modify.html", recruit_uuid=recruit_uuid)
 
 
 @app.route("/backoffice/recruit/<recruit_uuid>/student/detail/<student_id>")
 def student_show(recruit_uuid, student_id):
     return render_template("student/detail.html", recruit_uuid=recruit_uuid, student_id=student_id)
+
+
+@app.route("/backoffice/recruit/<recruit_uuid>/student/list")
+def student_list(recruit_uuid):
+    return render_template("student/list.html", recruit_uuid=recruit_uuid)
 
 
 @app.route("/backoffice/depart/add")
