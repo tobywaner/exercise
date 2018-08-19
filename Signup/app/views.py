@@ -16,7 +16,6 @@ def show_results():
 
 @app.route("/backoffice")
 @app.route("/login")
-@app.route("/backoffice/student")
 @app.route("/backoffice/recruit")
 @app.route("/backoffice/depart")
 def login():
